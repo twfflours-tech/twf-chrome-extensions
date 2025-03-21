@@ -23,6 +23,11 @@ tableRows.forEach((tableRow) => {
         "td.a-span4 input[name='height']"
       );
 
+      // // Set step attribute for decimal precision
+      // lengthInput.setAttribute('step', '0.1');
+      // widthInput.setAttribute('step', '0.1');
+      // heightInput.setAttribute('step', '0.1');
+
       fillField(lengthInput, matchingDimension.length);
       fillField(widthInput, matchingDimension.width);
       fillField(heightInput, matchingDimension.height);
@@ -34,4 +39,12 @@ function fillField(field, value) {
   if (field) {
     field.value = value;
   }
+
+  // Life saver line! Dispatch input event to trigger Amazon's validation
+  let event = new Event("input", {
+    bubbles: true,
+    cancelable: true,
+  });
+
+  field.dispatchEvent(event);
 }

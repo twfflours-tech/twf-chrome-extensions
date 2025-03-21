@@ -4,13 +4,8 @@ document
   .querySelector(".fillForm")
   .addEventListener("click", async function () {
     response = await fetch(chrome.extension.getURL("data.json"));
-    if (response.ok) {
-      responseJson = await response.json();
-    }
-    // console.log(responseJson);
+    responseJson = await response.json();
 
-    //grab the text filed value from my tool
-    // var intValue = document.getElementById("apivalue").value;
     chrome.tabs.executeScript(
       {
         //send the value to be used by our script
