@@ -24,9 +24,9 @@ tableRows.forEach((tableRow) => {
       );
 
       // // Set step attribute for decimal precision
-      // lengthInput.setAttribute('step', '0.1');
-      // widthInput.setAttribute('step', '0.1');
-      // heightInput.setAttribute('step', '0.1');
+      // lengthInput.setAttribute("step", "0.1");
+      // widthInput.setAttribute("step", "0.1");
+      // heightInput.setAttribute("step", "0.1");
 
       fillField(lengthInput, matchingDimension.length);
       fillField(widthInput, matchingDimension.width);
