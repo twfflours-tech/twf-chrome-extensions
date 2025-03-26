@@ -1,11 +1,12 @@
 // l(dimensions);
-
+// l(chrome.storage);
 var tableRows = document.querySelectorAll("table>tr table>tr.order-row-item");
-
 tableRows.forEach((tableRow) => {
+  // Filling dimensions
   var weightColumnInput = tableRow.querySelector(
     "td.a-span2 input[name='weight']"
   );
+
   if (weightColumnInput) {
     var weight = Number(weightColumnInput.value);
 
@@ -22,11 +23,6 @@ tableRows.forEach((tableRow) => {
       var heightInput = tableRow.querySelector(
         "td.a-span4 input[name='height']"
       );
-
-      // // Set step attribute for decimal precision
-      // lengthInput.setAttribute("step", "0.1");
-      // widthInput.setAttribute("step", "0.1");
-      // heightInput.setAttribute("step", "0.1");
 
       fillField(lengthInput, matchingDimension.length);
       fillField(widthInput, matchingDimension.width);
