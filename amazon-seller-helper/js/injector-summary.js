@@ -1,4 +1,3 @@
-// l(dimensions);
 // l(chrome.storage);
 var tableRows = document.querySelectorAll("table>tr table>tr.order-row-item");
 var skuData = [];

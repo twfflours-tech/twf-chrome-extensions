@@ -3,7 +3,7 @@ let responseJson;
 document
   .querySelector("#fill-button")
   .addEventListener("click", async function () {
-    response = await fetch(chrome.extension.getURL("data.json"));
+    response = await fetch(chrome.extension.getURL("data/data.json"));
     responseJson = await response.json();
 
     chrome.tabs.executeScript(
@@ -16,7 +16,7 @@ document
       function () {
         // Run the script in the file injector.js
         chrome.tabs.executeScript({
-          file: "injector.js",
+          file: "js/injector.js",
         });
       }
     );
@@ -33,7 +33,7 @@ document
       async function () {
         // Run the script in the file injector-summary.js
         await chrome.tabs.executeScript({
-          file: "injector-summary.js",
+          file: "js/injector-summary.js",
         });
 
         await chrome.tabs.create({ url: "summary.html" });

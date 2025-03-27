@@ -1,7 +1,6 @@
 window.onload = async function () {
-  let response = await fetch(chrome.extension.getURL("sku-data.json"));
+  let response = await fetch(chrome.extension.getURL("data/sku-data.json"));
   let responseJson = await response.json();
-  console.log(responseJson);
 
   chrome.storage.local.get("skuData", function (data) {
     console.log(data.skuData);
