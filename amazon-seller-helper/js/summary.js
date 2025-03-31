@@ -1,5 +1,6 @@
 window.onload = async function () {
-  let response = await fetch(chrome.extension.getURL("data/sku-data.json"));
+  // let response = await fetch(chrome.extension.getURL("data/sku-data.json"));
+  let response = await fetch(`https://twfflours.com/cdn/shop/t/31/assets/sku-data.json?v=${Date.now()}`);
   let responseJson = await response.json();
 
   chrome.storage.local.get("skuData", function (data) {
