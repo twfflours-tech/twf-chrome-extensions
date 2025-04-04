@@ -34,13 +34,13 @@ tableRows.forEach((tableRow) => {
 function fillField(field, value) {
   if (field) {
     field.value = value;
+
+    // Life saver line! Dispatch input event to trigger Amazon's validation
+    let event = new Event("input", {
+      bubbles: true,
+      cancelable: true,
+    });
+
+    field.dispatchEvent(event);
   }
-
-  // Life saver line! Dispatch input event to trigger Amazon's validation
-  let event = new Event("input", {
-    bubbles: true,
-    cancelable: true,
-  });
-
-  field.dispatchEvent(event);
 }

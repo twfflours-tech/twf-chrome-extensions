@@ -4,17 +4,17 @@
     <style>
       html,
       body {
-        height: 100px;
+        height: 150px;
         width: 300px;
         padding-left: 5px;
       }
 
-      .ctn-button {
+      /* .ctn-button {
         display: flex;
         justify-content: flex-start;
         align-items: center;
         gap: 10px;
-      }
+      } */
 
       .fillForm {
         align-items: center;
@@ -52,6 +52,8 @@
         white-space: nowrap;
         will-change: box-shadow, transform;
         font-size: 16px;
+        margin-bottom: 15px;
+        margin-right: 10px;
       }
 
       .fillForm:focus {
@@ -74,7 +76,8 @@
   <body>
     <h2>Click on of the buttons below:</h2>
     <div class="ctn-button">
-      <button id="fill-button" class="fillForm">Fill form</button>
+      <button id="fill-dimensions" class="fillForm">Fill dimensions</button>
+      <button id="fill-weights" class="fillForm">Fill weights</button><br />
       <button id="show-summary" class="fillForm">Show summary</button>
     </div>
     <script src="js/action.js"></script>
