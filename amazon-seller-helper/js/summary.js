@@ -44,13 +44,14 @@ window.onload = async function () {
             eliminated.push(current.SKU);
 
             for (const child in children) {
+              const quantity = children[child] * current.quantity;
               const existingChild = acc.find((item) => item.SKU === child);
               if (existingChild) {
-                existingChild.quantity += current.quantity;
+                existingChild.quantity += quantity;
               } else {
                 acc.push({
                   SKU: child,
-                  quantity: children[child] * current.quantity,
+                  quantity,
                   description: allSKUData[child].description,
                 });
               }
