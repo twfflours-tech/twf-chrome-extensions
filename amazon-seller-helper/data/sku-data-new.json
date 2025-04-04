@@ -1,0 +1,843 @@
+{
+    "TWFDF1000": {
+        "description": "Flour X 1 Kg",
+        "weight": 1000
+    },
+    "TWFDF3000": {
+        "description": "Flour X 3 Kg",
+        "weight": 3000,
+        "children": {
+            "TWFDF1000": 3
+        }
+    },
+    "TWFDF6000": {
+        "description": "Flour X 6 Kg",
+        "weight": 6000,
+        "children": {
+            "TWFDF1000": 6
+        }
+    },
+    "TWFX20K": {
+        "description": "Flour X 20 Kg",
+        "weight": 20000
+    },
+    "TWF8615": {
+        "description": "Series C 8615 1 Kg",
+        "weight": 1000
+    },
+    "TWF8615-5": {
+        "description": "Series C 8615 5 Kg",
+        "weight": 5000
+    },
+    "LD-6QMU-GFZW": {
+        "description": "Series C 8615 1 Kg + 1 Kg Baker's Salt Combo",
+        "weight": 2000,
+        "children": {
+            "TWF8615": 1,
+            "M0-N13U-A5JW": 1
+        }
+    },
+    "TWF8615-10": {
+        "description": "Series C 8615 10 Kg",
+        "weight": 10000,
+        "children": {
+            "TWF8615-5": 2
+        }
+    },
+    "TWF861520K": {
+        "description": "Series C 8615 20 Kg",
+        "weight": 20000
+    },
+    "TWFHF1000": {
+        "description": "Highland 1 Kg",
+        "weight": 1000
+    },
+    "ND-CDA5-COPU": {
+        "description": "Highland 5 Kg",
+        "weight": 5000
+    },
+    "TWFHF10K": {
+        "description": "Highland 10 Kg",
+        "weight": 10000,
+        "children": {
+            "ND-CDA5-COPU": 2
+        }
+    },
+    "I0-VQC5-1FVJ": {
+        "description": "Highland 20 Kg",
+        "weight": 20000
+    },
+    "RL-MP3H-P4UD": {
+        "description": "Virgin Barley 500g",
+        "weight": 500
+    },
+    "CK-8D4D-TMQI": {
+        "description": "Virgin Barley 1 Kg",
+        "weight": 1000
+    },
+    "CS-HZ6V-HUJQ": {
+        "description": "Virgin Barley 5 Kg",
+        "weight": 5000
+    },
+    "TWFSC1000": {
+        "description": "Series C - 8714 1 Kg",
+        "weight": 1000
+    },
+    "TWFSC3000": {
+        "description": "Series C - 8714 3 Kg",
+        "weight": 3000,
+        "children": {
+            "TWFSC1000": 3
+        }
+    },
+    "TWFSC6000": {
+        "description": "Series C - 8714 6 Kg",
+        "weight": 6000,
+        "children": {
+            "TWFSC1000": 6
+        }
+    },
+    "TWF871420K": {
+        "description": "Series C - 8714 20 Kg",
+        "weight": 20000
+    },
+    "20-YGLG-01L2": {
+        "description": "C-8714 1 Kg + 1 Kg Baker's Salt Combo",
+        "weight": 2000,
+        "children": {
+            "TWFSC1000": 1,
+            "M0-N13U-A5JW": 1
+        }
+    },
+    "TWFRF1000": {
+        "description": "Reliq 1 Kg",
+        "weight": 1000
+    },
+    "TWFRELIQNEW5000": {
+        "description": "Reliq 5 Kg",
+        "weight": 5000
+    },
+    "TWFRELIQNEW10000": {
+        "description": "Reliq 10 Kg",
+        "weight": 10000,
+        "children": {
+            "TWFRELIQNEW5000": 2
+        }
+    },
+    "WH-V3CK-N9TV": {
+        "description": "Reliq 20 Kg",
+        "weight": 20000
+    },
+    "TWFIF1000": {
+        "description": "Indie 1 Kg",
+        "weight": 1000
+    },
+    "TWFIF5000": {
+        "description": "Indie 5 Kg",
+        "weight": 5000
+    },
+    "TWFIF10K": {
+        "description": "Indie 10 Kg",
+        "weight": 10000,
+        "children": {
+            "TWFIF5000": 2
+        }
+    },
+    "W4-EY47-80AW": {
+        "description": "Indie 20 Kg",
+        "weight": 20000
+    },
+    "3G-B6TM-6GB8": {
+        "description": "T 45 500G",
+        "weight": 500
+    },
+    "N0-ULX3-CTPJ": {
+        "description": "T 45 1 Kg",
+        "weight": 1000
+    },
+    "1E-DK0Y-083W": {
+        "description": "T 45 5 Kg",
+        "weight": 5000
+    },
+    "TJ-ZS4P-KF6J": {
+        "description": "T 45 20 Kg",
+        "weight": 20000
+    },
+    "TWF83181000": {
+        "description": "Series C-8318 1 Kg",
+        "weight": 1000
+    },
+    "TWF83183000": {
+        "description": "Series C-8318 3 Kg",
+        "weight": 3000,
+        "children": {
+            "TWF83181000": 3
+        }
+    },
+    "TWF83186000": {
+        "description": "Series C-8318 6 Kg",
+        "weight": 6000,
+        "children": {
+            "TWF83181000": 6
+        }
+    },
+    "TWF831820K": {
+        "description": "Series C-8318 20 Kg",
+        "weight": 20000
+    },
+    "MJ-56O0-TKU1": {
+        "description": "C-8318 1 Kg + 1 Kg Baker's Salt Combo",
+        "weight": 2000,
+        "children": {
+            "TWF83181000": 1,
+            "M0-N13U-A5JW": 1
+        }
+    },
+    "5G-M22A-VPA8": {
+        "description": "Almond Flour 200g",
+        "weight": 200
+    },
+    "2K-1CA4-J2SS": {
+        "description": "Almond Flour 1 Kg",
+        "weight": 1000,
+        "children": {
+            "5G-M22A-VPA8": 5
+        }
+    },
+    "R7-JOPB-LUSH": {
+        "description": "Virgin Sorghum 500g",
+        "weight": 500
+    },
+    "BE-WJXH-HPNW": {
+        "description": "Virgin Sorghum 1 Kg",
+        "weight": 1000
+    },
+    "6R-C9ZD-KJQT": {
+        "description": "Virgin Sorghum 5 Kg",
+        "weight": 5000,
+        "children": {
+            "BE-WJXH-HPNW": 5
+        }
+    },
+    "TWFKETOFLOUR": {
+        "description": "Keto 1 Kg",
+        "weight": 1000
+    },
+    "TWFKETO2KG": {
+        "description": "Keto 2 Kg",
+        "weight": 2000,
+        "children": {
+            "TWFKETOFLOUR": 2
+        }
+    },
+    "JP-YTXS-7EDY": {
+        "description": "Dry Yeast 100g",
+        "weight": 100
+    },
+    "3S-LW9T-JH13": {
+        "description": "Dry Yeast 500g",
+        "weight": 500,
+        "children": {
+            "JP-YTXS-7EDY": 5
+        }
+    },
+    "HTMALTEDBARLEY": {
+        "description": "Malted Barley 200g",
+        "weight": 200
+    },
+    "K2-5NUP-JVGE": {
+        "description": "Malted Barley 1 Kg",
+        "weight": 1000,
+        "children": {
+            "HTMALTEDBARLEY": 5
+        }
+    },
+    "TWFRYEFLOUR": {
+        "description": "Dark Rye 200g",
+        "weight": 200
+    },
+    "R4-TYL8-8CFA": {
+        "description": "Dark Rye 1 Kg",
+        "weight": 1000
+    },
+    "TWFSEM1000": {
+        "description": "Semolina 1 Kg",
+        "weight": 1000
+    },
+    "TWFSEM3000": {
+        "description": "Semolina 3 Kg",
+        "weight": 3000,
+        "children": {
+            "TWFSEM1000": 3
+        }
+    },
+    "TWFSEM6000": {
+        "description": "Semolina 6 Kg",
+        "weight": 6000,
+        "children": {
+            "TWFSEM1000": 6
+        }
+    },
+    "M0-N13U-A5JW": {
+        "description": "Baker's Salt 1 Kg",
+        "weight": 1000
+    },
+    "DM-JB16-E2M6": {
+        "description": "T55 1 Kg",
+        "weight": 1000
+    },
+    "7M-QCZP-AJQE": {
+        "description": "T55 5 Kg",
+        "weight": 5000
+    },
+    "DQ-2WJF-SS9R": {
+        "description": "T55 20 Kg",
+        "weight": 20000
+    },
+    "T553KYEAST100": {
+        "description": "T55 3 Kg + 100g Yeast",
+        "weight": 3100,
+        "children": {
+            "DM-JB16-E2M6": 3,
+            "JP-YTXS-7EDY": 1
+        }
+    },
+    "O8-EDS0-5MCE": {
+        "description": "T55 1 Kg+ 1 Kg Baker's Salt Combo",
+        "weight": 2000,
+        "children": {
+            "DM-JB16-E2M6": 1,
+            "M0-N13U-A5JW": 1
+        }
+    },
+    "AK-JQPD-UZ15": {
+        "description": "T55 1 Kg+ 100g Dry Yeast",
+        "weight": 1100,
+        "children": {
+            "DM-JB16-E2M6": 1,
+            "JP-YTXS-7EDY": 1
+        }
+    },
+    "TWF-PF-WO-1000": {
+        "description": "Neapolitan 1 Kg",
+        "weight": 1000
+    },
+    "MZ-949O-IOP3": {
+        "description": "Neapolitan 5 Kg",
+        "weight": 5000
+    },
+    "KL-M2XZ-UG0P": {
+        "description": "Neapolitan 20 Kg",
+        "weight": 20000
+    },
+    "PIZZA3KYEAST100": {
+        "description": "Neapolitan 3 Kg + 100g Yeast",
+        "weight": 3100,
+        "children": {
+            "TWF-PF-WO-1000": 3,
+            "JP-YTXS-7EDY": 1
+        }
+    },
+    "OT-DE4Q-U073": {
+        "description": "Neapolitan 1 Kg+ 1 Kg Baker's Salt Combo",
+        "weight": 2000,
+        "children": {
+            "TWF-PF-WO-1000": 1,
+            "M0-N13U-A5JW": 1
+        }
+    },
+    "TWF-PF-HO-1000": {
+        "description": "Thin Crust 1 Kg",
+        "weight": 1000
+    },
+    "KY-FTRP-SBB7": {
+        "description": "Thin Crust 20 Kg",
+        "weight": 20000
+    },
+    "9F-LN12-M91X": {
+        "description": "Thin Crust 1 Kg + 1 Kg Baker's Salt Combo",
+        "weight": 2000,
+        "children": {
+            "TWF-PF-HO-1000": 1,
+            "M0-N13U-A5JW": 1
+        }
+    },
+    "Khapli_500 Gram": {
+        "description": "Khapli 500g",
+        "weight": 500
+    },
+    "Khapli_1": {
+        "description": "Khapli 1 Kg",
+        "weight": 1000
+    },
+    "ZE-T87O-5I28": {
+        "description": "Khapli 2 Kg",
+        "weight": 2000,
+        "children": {
+            "Khapli_1": 2
+        }
+    },
+    "T3-9SL7-CK1X": {
+        "description": "Khapli 5 Kg",
+        "weight": 5000
+    },
+    "OD-YKXM-JK8X": {
+        "description": "Khapli 6 Kg",
+        "weight": 6000,
+        "children": {
+            "T3-9SL7-CK1X": 1,
+            "Khapli_1": 1
+        }
+    },
+    "AI-STXJ-V4VS": {
+        "description": "Khapli 10 Kg",
+        "weight": 10000,
+        "children": {
+            "T3-9SL7-CK1X": 2
+        }
+    },
+    "CP-57D8-QDSX": {
+        "description": "Khapli 20 Kg",
+        "weight": 20000
+    },
+    "TWFDIABETICF": {
+        "description": "Sail 1 Kg",
+        "weight": 1000
+    },
+    "TWFDIABETIC5000": {
+        "description": "Sail 5 Kg",
+        "weight": 5000
+    },
+    "QL-JZRX-6T1F": {
+        "description": "Virgin Khapli 1  Kg",
+        "weight": 1000
+    },
+    "FN-1NHJ-Z2D7": {
+        "description": "Millet Khapli 1 Kg",
+        "weight": 1000
+    },
+    "UK-KBE6-0EH0": {
+        "description": "High Protein 1 Kg",
+        "weight": 1000
+    },
+    "J5-CNF3-V9UD": {
+        "description": "Barnyard Millet 500g",
+        "weight": 500
+    },
+    "1G-83MY-2WX1": {
+        "description": "Barnyard Millet 1 Kg",
+        "weight": 1000
+    },
+    "69-NK4X-T7G7": {
+        "description": "Barnyard Flour 500g",
+        "weight": 500
+    },
+    "K1-7L9P-HWI2": {
+        "description": "Barnyard Flour 1 Kg",
+        "weight": 1000
+    },
+    "1T-AA04-MGJ2": {
+        "description": "Foxtail Millet 500g",
+        "weight": 500
+    },
+    "AC-BTO9-A98C": {
+        "description": "Foxtail Millet 1 Kg",
+        "weight": 1000
+    },
+    "BS-SIWH-2ZYL": {
+        "description": "Foxtail Flour 500g",
+        "weight": 500
+    },
+    "Q0-OAHT-JX5X": {
+        "description": "Foxtail Flour 1 Kg",
+        "weight": 1000
+    },
+    "61-9IBX-FG4K": {
+        "description": "Kodo Millet 500g",
+        "weight": 500
+    },
+    "IJ-1FMK-FL1V": {
+        "description": "Kodo Millet 1 Kg",
+        "weight": 1000
+    },
+    "WL-TURX-WHFD": {
+        "description": "Kodo Flour 500g",
+        "weight": 500
+    },
+    "70-S5DW-XMRG": {
+        "description": "Kodo Flour 1 Kg",
+        "weight": 1000
+    },
+    "JW-1K6P-RNR0": {
+        "description": "Little Millet 500 Kg",
+        "weight": 500
+    },
+    "SR-MW0O-3DOV": {
+        "description": "Little Millet 1 Kg",
+        "weight": 1000
+    },
+    "03-0823-YW2G": {
+        "description": "Little Flour 500g",
+        "weight": 500
+    },
+    "80-TSVK-VWZI": {
+        "description": "Little Flour 1 Kg",
+        "weight": 1000
+    },
+    "4V-M4XM-W9Q1": {
+        "description": "Amaranth Millet 500g",
+        "weight": 500
+    },
+    "4Z-GHQE-WD5U": {
+        "description": "Amaranth Millet 1 Kg",
+        "weight": 1000
+    },
+    "7O-EPFQ-I8ZA": {
+        "description": "Amaranth Flour 500g",
+        "weight": 500
+    },
+    "FC-WHPL-KRXA": {
+        "description": "Amaranth Flour 1 Kg",
+        "weight": 1000
+    },
+    "WC-AQRO-8WNV": {
+        "description": "Ragi Millet 500g",
+        "weight": 500
+    },
+    "7M-WWXT-FXDE": {
+        "description": "Ragi Millet 1 Kg",
+        "weight": 1000
+    },
+    "EI-RLS8-LPLH": {
+        "description": "Ragi Flour 500g",
+        "weight": 500
+    },
+    "SC-J7LU-8LTI": {
+        "description": "Ragi Flour 1 Kg",
+        "weight": 1000
+    },
+    "0J-XNIO-LTX5": {
+        "description": "Bajra Millet 500g",
+        "weight": 500
+    },
+    "6N-05EY-OTFN": {
+        "description": "Bajra Millet 1 Kg",
+        "weight": 1000
+    },
+    "CV-FPGP-DOE2": {
+        "description": "Bajra Flour 500g",
+        "weight": 500
+    },
+    "6A-J1SR-PPVQ": {
+        "description": "Bajra Flour 1 Kg",
+        "weight": 1000
+    },
+    "NU-AGMK-LC7R": {
+        "description": "Quinoa Millet 500g",
+        "weight": 500
+    },
+    "9L-A6JK-FHNC": {
+        "description": "Quinoa Millet 1 Kg",
+        "weight": 1000
+    },
+    "UM-Q2HF-5TWQ": {
+        "description": "Quinoa Flour 500g",
+        "weight": 500
+    },
+    "P6-9NSD-R58U": {
+        "description": "Quinoa Flour 1 Kg",
+        "weight": 1000
+    },
+    "W4-KLID-Q8RM": {
+        "description": "Buckwheat Millet 500g",
+        "weight": 500
+    },
+    "K3-EMDJ-F6GF": {
+        "description": "Buckwheat Millet 1 Kg",
+        "weight": 1000
+    },
+    "FLOURBUCKWHEAT500-NEW": {
+        "description": "Buckwheat Flour 500g",
+        "weight": 500
+    },
+    "FLOURBUCKWHEAT1K-NEW": {
+        "description": "Buckwheat Flour 1 Kg",
+        "weight": 1000
+    },
+    "3H-08S1-257S": {
+        "description": "Proso Millet 500g",
+        "weight": 500
+    },
+    "3C-198W-68AO": {
+        "description": "Proso Millet 1 Kg",
+        "weight": 1000
+    },
+    "PA-YI5G-LEDQ": {
+        "description": "Proso Flour 500g",
+        "weight": 500
+    },
+    "4O-TG54-LKXN": {
+        "description": "Proso Flour 1 Kg",
+        "weight": 1000
+    },
+    "03-PS7B-CEHN": {
+        "description": "Browntop Millet 500g",
+        "weight": 500
+    },
+    "CH-R0G4-R72C": {
+        "description": "Browntop Millet 1 Kg",
+        "weight": 1000
+    },
+    "PC-IY0Z-V4WW": {
+        "description": "Browntop Flour 500g",
+        "weight": 500
+    },
+    "F3-FE4L-QKBM": {
+        "description": "Browntop Flour 1 Kg",
+        "weight": 1000
+    },
+    "CORN500": {
+        "description": "Corn Flour 500g",
+        "weight": 500
+    },
+    "CORN1K": {
+        "description": "Corn Flour 1 Kg",
+        "weight": 1000
+    },
+    "COCONUT200": {
+        "description": "Coconut Flour 200g",
+        "weight": 200
+    },
+    "COCONUT1K": {
+        "description": "Coconut Flour 1 Kg",
+        "weight": 1000,
+        "children": {
+            "COCONUT200": 5
+        }
+    },
+    "OATSFLOUR500": {
+        "description": "Oats Flour 500g",
+        "weight": 500
+    },
+    "OATSFLOUR1K": {
+        "description": "Oats Flour 1 Kg",
+        "weight": 1000
+    },
+    "SOYABEANFLOUR500": {
+        "description": "Soyabean Flour 500g",
+        "weight": 500
+    },
+    "SOYABEANFLOUR1K": {
+        "description": "Soyabean Flour 1 Kg",
+        "weight": 1000
+    },
+    "FLAXFLOUR500": {
+        "description": "Flax Seed Flour 500g",
+        "weight": 500
+    },
+    "B0DTF72CGX": {
+        "description": "Flax Seed Flour 1 Kg",
+        "weight": 1000
+    },
+    "SEEDSFLAX200": {
+        "description": "Flax Seeds 200g",
+        "weight": 200
+    },
+    "SEEDSFLAX1K": {
+        "description": "Flax Seeds 1 Kg",
+        "weight": 1000,
+        "children": {
+            "SEEDSFLAX200": 5
+        }
+    },
+    "SEEDSPUMPKIN200": {
+        "description": "Pumpkin Seeds 200g",
+        "weight": 200
+    },
+    "SEEDSPUMPKIN1K": {
+        "description": "Pumpkin Seeds 1 Kg",
+        "weight": 1000,
+        "children": {
+            "SEEDSPUMPKIN200": 5
+        }
+    },
+    "SEEDSSUNFLOWER200": {
+        "description": "Sunflower Seeds 200g",
+        "weight": 200
+    },
+    "SEEDSSUNFLOWER1K": {
+        "description": "Sunflower Seeds 1 Kg",
+        "weight": 1000,
+        "children": {
+            "SEEDSSUNFLOWER200": 5
+        }
+    },
+    "JA-V1BE-Z1FV": {
+        "description": "Chia Seeds 200g",
+        "weight": 200
+    },
+    "O6-X6IX-OUM1": {
+        "description": "Chia Seeds 1 Kg",
+        "weight": 1000,
+        "children": {
+            "JA-V1BE-Z1FV": 5
+        }
+    },
+    "TAPIOCA500": {
+        "description": "Tapioca Flour 500g",
+        "weight": 500
+    },
+    "TAPIOCA1K": {
+        "description": "Tapioca Flour 1 Kg",
+        "weight": 1000
+    },
+    "SEEDSWATERMELON200": {
+        "description": "Watermelon Seeds 200g",
+        "weight": 200
+    },
+    "SEEDSWATERMELON1K": {
+        "description": "Watermelon Seeds 1 Kg",
+        "weight": 1000,
+        "children": {
+            "SEEDSWATERMELON200": 5
+        }
+    },
+    "SEEDSMUSKMELON200": {
+        "description": "Muskmelon Seeds 200g",
+        "weight": 200
+    },
+    "SEEDSMUSKMELON1K": {
+        "description": "Muskmelon Seeds 1 Kg",
+        "weight": 1000,
+        "children": {
+            "SEEDSMUSKMELON200": 5
+        }
+    },
+    "BENGALGRAM 500g": {
+        "description": "Roasted Bengal Gram flour 500g",
+        "weight": 500
+    },
+    "BENGALGRAM1K": {
+        "description": "Roasted Bengal Gram flour 1 Kg",
+        "weight": 1000
+    },
+    "RICE500": {
+        "description": "Rice Flour 500g",
+        "weight": 500
+    },
+    "RICE1K": {
+        "description": "Rice Flour 1 Kg",
+        "weight": 1000
+    },
+    "BANANA500": {
+        "description": "Banana Flour 500g",
+        "weight": 500
+    },
+    "BANANA1K": {
+        "description": "Banana Flour 1 Kg",
+        "weight": 1000
+    },
+    "JACKFRUIT500": {
+        "description": "Jackfruit Flour 500g",
+        "weight": 500
+    },
+    "JACKFRUIT1K": {
+        "description": "Jackfruit Flour 1 Kg",
+        "weight": 1000
+    },
+    "JACKFRUIT3K": {
+        "description": "Jackfruit Flour 3 Kg",
+        "weight": 3000,
+        "children": {
+            "JACKFRUIT1K": 3
+        }
+    },
+    "JACKFRUIT6K": {
+        "description": "Jackfruit Flour 6 Kg",
+        "weight": 6000,
+        "children": {
+            "JACKFRUIT1K": 6
+        }
+    },
+    "PEARLBARLEY500": {
+        "description": "Pearl Barley 500g",
+        "weight": 500
+    },
+    "PEARLBARLEY1K": {
+        "description": "Pearl Barley1 Kg",
+        "weight": 1000
+    },
+    "SEABUCKTHORNPOWDER100": {
+        "description": "SeaBuckthorn POWDER 100g",
+        "weight": 100
+    },
+    "SEABUCKTHORNPOWDER200": {
+        "description": "SeaBuckthorn POWDER 200g",
+        "weight": 200
+    },
+    "HALIM400": {
+        "description": "Halim Seeds 400g",
+        "weight": 400,
+        "children": {
+            "HALIM200": 2
+        }
+    },
+    "HALIM200": {
+        "description": "Halim Seeds 200g",
+        "weight": 200
+    },
+    "HEMP200": {
+        "description": "Hemp Seeds 200g",
+        "weight": 200
+    },
+    "HEMP100": {
+        "description": "Hemp Seeds 100g",
+        "weight": 100
+    },
+    "INULIN400": {
+        "description": "Inulin Powder 400g",
+        "weight": 400,
+        "children": {
+            "INULIN200": 2
+        }
+    },
+    "INULIN200": {
+        "description": "Inulin Powder 200g",
+        "weight": 200
+    },
+    "ACACIA1K": {
+        "description": "Acacia Powder 1kg",
+        "weight": 1000,
+        "children": {
+            "ACACIA200": 5
+        }
+    },
+    "ACACIA200": {
+        "description": "Acacia Powder 200g",
+        "weight": 200
+    },
+    "MORINGA200": {
+        "description": "Moringa Powder 200g",
+        "weight": 200
+    },
+    "MORINGA100": {
+        "description": "Moringa Powder 100g",
+        "weight": 100
+    },
+    "ARJUNCHAAL500": {
+        "description": "Arjun Chaal Powder 500g",
+        "weight": 500
+    },
+    "ARJUNCHAAL1K": {
+        "description": "Arjun Chaal Powder 1kg",
+        "weight": 1000
+    },
+    "SPROUTEDRAGIFLOUR500": {
+        "description": "Sprouted Ragi Flour 500g",
+        "weight": 500
+    },
+    "SPROUTEDRAGIFLOUR1KG": {
+        "description": "Sprouted Ragi Flour 1kg",
+        "weight": 1000
+    }
+}
