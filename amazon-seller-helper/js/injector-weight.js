@@ -20,8 +20,11 @@ tables.forEach((table) => {
       var quantity = Number(
         column.childNodes[6].innerText.replace("Quantity :", "")
       );
-
-      netWeight += allSKUData[sku].weight * quantity;
+      if (allSKUData[sku]) {
+        netWeight += allSKUData[sku].weight * quantity;
+      } else {
+        netWeight += 1000 * quantity;
+      }
     }
 
     // l(netWeight);
