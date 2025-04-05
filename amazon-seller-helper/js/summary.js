@@ -9,7 +9,7 @@ window.onload = async function () {
     let table =
       '<table border="1"><tr><th>SKU</th><th>Description</th><th>Quantity</th></tr>';
     data.forEach((item) => {
-      table += `<tr><td>${item.SKU}</td><td>${item.description}</td><td align=center>${item.quantity}</td></tr>`;
+      table += `<tr><td><b>${item.SKU}</b></td><td>${item.description}</td><td align=center>${item.quantity}</td></tr>`;
     });
     table += "</table>";
     return table;
@@ -24,7 +24,10 @@ window.onload = async function () {
       if (existing) {
         existing.quantity += current.quantity;
       } else {
-        current.description = allSKUData[current.SKU].description;
+        const sku = allSKUData[current.SKU];
+        current.description = sku
+          ? sku.description
+          : "<b>Not added yet - Won't be grouped</b>";
         acc.push({ ...current });
       }
 
@@ -39,7 +42,10 @@ window.onload = async function () {
         if (existing) {
           existing.quantity += current.quantity;
         } else {
-          const { children } = allSKUData[current.SKU];
+          const sku = allSKUData[current.SKU];
+          if (!sku) return acc; // Skip if SKU not found
+
+          const { children } = sku;
           if (children) {
             eliminated.push(current.SKU);
 
