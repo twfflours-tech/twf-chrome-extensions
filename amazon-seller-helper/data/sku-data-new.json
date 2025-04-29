@@ -855,5 +855,49 @@
   "FLAXFLOUR1K": {
     "description": "Flax Seed Flour 1 Kg",
     "weight": 1000
+  },
+  "HALIM200": {
+    "description": "Halim Seeds 200g",
+    "weight": 200
+  },
+  "HALIM400": {
+    "description": "Halim Seeds 400g",
+    "weight": 400
+  },
+  "DALIYABARLEY1000G": {
+    "description": "Barley Daliya 1 Kg",
+    "weight": 1000
+  },
+  "DALIYABARLEY500G": {
+    "description": "Barley Daliya 500g",
+    "weight": 500
+  },
+  "SPROUTEDAMARANTHFLOUR500G": {
+    "description": "Sprouted Amaranth Flour 500g",
+    "weight": 500
+  },
+  "SPROUTEDAMARANTHFLOUR1KG": {
+    "description": "Sprouted Amaranth Flour 1 Kg",
+    "weight": 1000
+  },
+  "SPROUTEDRAGIFLOUR500G": {
+    "description": "Sprouted Ragi Flour 500g",
+    "weight": 500
+  },
+  "SPROUTEDRAGIFLOUR1000G": {
+    "description": "Sprouted Ragi Flour 1 Kg",
+    "weight": 1000
+  },
+  "0W-ZYL0-8N5J": {
+    "description": "Baking Powder 200g",
+    "weight": 200
+  },
+  "35-Q8QC-2DTE": {
+    "description": "Fenugreek Seeds 1 Kg",
+    "weight": 1000
+  },
+  "BAKINGSODA1KG": {
+    "description": "Baking Soda 1 Kg",
+    "weight": 1000
   }
 }
