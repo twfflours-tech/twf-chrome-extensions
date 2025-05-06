@@ -1,4 +1,3 @@
-// var tables = document.querySelectorAll("table>tr table.a-bordered");
 var tables = document.querySelectorAll("table.inner-order-table");
 var netWeight;
 var weightColumnInput;
@@ -24,16 +23,19 @@ tables.forEach((table) => {
   var tableRows = [...table.querySelectorAll("tr.order-item-row")];
 
   tableRows.forEach((tableRow) => {
-    l(tableRow);
+    // l(tableRow);
     // Getting SKU and Quantity
     var firstColumn = tableRow.querySelector(
       ".vertical-center.char-spaced-elements"
     );
+
     if (firstColumn) {
       var column = firstColumn.querySelector("div:last-child .align-start");
+
       var sku = column.querySelector(
         "div:first-child span[data-testid='line-item-sku']"
       ).innerText;
+
       var quantity = Number(
         column.querySelector(
           "div:last-child span[data-testid='line-item-quantity']"
