@@ -1,13 +1,41 @@
-// l(dimensions);
+l(dimensions);
 // l(chrome.storage);
-var tableRows = document.querySelectorAll("table>tr table>tr.order-row-item");
-tableRows.forEach((tableRow) => {
+
+function queryDeepShadow(selector, root) {
+  let element = root || document;
+  const selectors = selector.split(">>>");
+
+  for (const s of selectors) {
+    element = element.querySelector(s.trim());
+    if (element && element.shadowRoot) {
+      element = element.shadowRoot;
+    } else if (!element) {
+      return null;
+    }
+  }
+  return element;
+}
+
+var orderTables = document.querySelectorAll("table.inner-order-table");
+
+orderTables.forEach((orderTable) => {
+  // l(orderTable);
   // Filling dimensions
-  var weightColumnInput = tableRow.querySelector(
-    "td.a-span2 input[name='weight']"
+  var weightColumn = orderTable.querySelector(
+    "td.order-item-cell:nth-child(2)"
+  );
+
+  var dimensionsColumn = orderTable.querySelector(
+    "td.order-item-cell:nth-child(3)"
+  );
+
+  var weightColumnInput = queryDeepShadow(
+    "kat-input >>> .container >>> input",
+    weightColumn
   );
 
   if (weightColumnInput) {
+    // l("Element found:", weightColumnInput);
     var weight = Number(weightColumnInput.value);
 
     // Find the matching dimension based on weight range
@@ -16,18 +44,25 @@ tableRows.forEach((tableRow) => {
     );
 
     if (matchingDimension) {
-      var lengthInput = tableRow.querySelector(
-        "td.a-span4 input[name='length']"
+      var lengthInput = queryDeepShadow(
+        "kat-input[data-testid='length-input'] >>> .container >>> input",
+        dimensionsColumn
       );
-      var widthInput = tableRow.querySelector("td.a-span4 input[name='width']");
-      var heightInput = tableRow.querySelector(
-        "td.a-span4 input[name='height']"
+      var widthInput = queryDeepShadow(
+        "kat-input[data-testid='width-input'] >>> .container >>> input",
+        dimensionsColumn
+      );
+      var heightInput = queryDeepShadow(
+        "kat-input[data-testid='height-input'] >>> .container >>> input",
+        dimensionsColumn
       );
 
       fillField(lengthInput, matchingDimension.length);
       fillField(widthInput, matchingDimension.width);
       fillField(heightInput, matchingDimension.height);
     }
+  } else {
+    // l("Element not found");
   }
 });
 
