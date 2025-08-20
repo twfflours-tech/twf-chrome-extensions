@@ -23,4 +23,6 @@ tableRows.forEach(tableRow => {
 
 // l(skuData);
 
-chrome.storage.local.set({ skuData });
+chrome.storage.local.set({ skuData }).then(() => {
+  console.log("skuData is set", skuData);
+});

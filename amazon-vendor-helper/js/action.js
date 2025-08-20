@@ -1,18 +1,16 @@
+async function getCurrentTab() {
+  let queryOptions = { active: true, lastFocusedWindow: true };
+  let [tab] = await chrome.tabs.query(queryOptions);
+  return tab;
+}
+
 document
   .querySelector("#show-summary")
   .addEventListener("click", async function() {
-    chrome.tabs.executeScript(
-      {
-        // Send the value to be used by our script
-        code: `var l = console.log.bind(window.console);`
-      },
-      async function() {
-        // Run the script in the file injector-summary.js
-        await chrome.tabs.executeScript({
-          file: "js/injector-summary.js"
-        });
-
-        await chrome.tabs.create({ url: "summary.html" });
-      }
-    );
+    const tab = await getCurrentTab();
+    await chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      files: ["js/injector-summary.js"]
+    });
+    await chrome.tabs.create({ url: "summary.html" });
   });

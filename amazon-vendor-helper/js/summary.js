@@ -15,7 +15,7 @@ window.onload = async function() {
     return table;
   };
 
-  chrome.storage.local.get("skuData", function(data) {
+  chrome.storage.local.get(["skuData"]).then(function(data) {
     console.log("skuData", data.skuData);
     // document.querySelector("#summary").innerHTML = JSON.stringify(data.skuData);
 
