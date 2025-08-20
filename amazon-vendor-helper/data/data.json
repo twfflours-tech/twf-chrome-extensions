@@ -1,0 +1,50 @@
+[
+  {
+    "weightRange": [0, 500],
+    "length": 25,
+    "width": 7,
+    "height": 7
+  },
+  {
+    "weightRange": [501, 1000],
+    "length": 32.6,
+    "width": 10.5,
+    "height": 8.4
+  },
+  {
+    "weightRange": [1001, 3000],
+    "length": 30,
+    "width": 21,
+    "height": 7
+  },
+  {
+    "weightRange": [3001, 5000],
+    "length": 33,
+    "width": 19,
+    "height": 33
+  },
+  {
+    "weightRange": [5001, 8000],
+    "length": 33,
+    "width": 19,
+    "height": 33
+  },
+  {
+    "weightRange": [8001, 12000],
+    "length": 22,
+    "width": 28,
+    "height": 20
+  },
+  {
+    "weightRange": [12001, 16000],
+    "length": 33,
+    "width": 38,
+    "height": 33
+  },
+  {
+    "weightRange": [16001, 10000000],
+    "length": 33,
+    "width": 38,
+    "height": 33
+  }
+]
