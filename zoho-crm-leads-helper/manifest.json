@@ -5,7 +5,7 @@
   "homepage_url": "https://twfflours.com",
   "version": "1.0",
   "action": {
-    "default_icon": {
+    "icons": {
       "16": "images/icon-16.png",
       "32": "images/icon-32.png",
       "48": "images/icon-48.png",
