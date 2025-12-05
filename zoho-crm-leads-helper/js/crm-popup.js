@@ -45,16 +45,16 @@
         <div class="twf-content">
           <div id="twf-view-whatsapp" class="twf-view active">
             <label class="twf-label">To</label>
-            <input id="twf-wa-to" class="twf-input" placeholder="Phone numbers, comma-separated" />
+            <input id="twf-wa-to" class="twf-input" placeholder="Phone number" />
             <label class="twf-label">Message</label>
-            <textarea id="twf-wa-msg" class="twf-textarea" rows="4" placeholder="Type your WhatsApp message"></textarea>
+            <textarea id="twf-wa-msg" class="twf-textarea" rows="4" placeholder="Type your WhatsApp message">Hello, this is <salesperson_name> from TWF. I have received your inquiry. Please let me know a suitable time to connect.</textarea>
             <button id="twf-wa-send" class="twf-send">Send</button>
           </div>
           <div id="twf-view-email" class="twf-view">
             <label class="twf-label">To</label>
             <input id="twf-email-to" class="twf-input" placeholder="Emails, comma-separated" />
             <label class="twf-label">Message</label>
-            <textarea id="twf-email-msg" class="twf-textarea" rows="4" placeholder="Type your email message"></textarea>
+            <textarea id="twf-email-msg" class="twf-textarea" rows="4" placeholder="Type your email message">Hello, this is <salesperson_name> from TWF. I have received your inquiry. Please let me know a suitable time to connect.</textarea>
             <button id="twf-email-send" class="twf-send">Send</button>
           </div>
         </div>
@@ -88,8 +88,13 @@
       });
 
       waSend.addEventListener("click", () => {
-        const to = popup.querySelector("#twf-wa-to").value.trim();
+        const raw = popup.querySelector("#twf-wa-to").value.trim();
+        const phone = raw.replace(/[+\-]/g, "").replace(/\D/g, "");
         const msg = popup.querySelector("#twf-wa-msg").value.trim();
+        if (phone) {
+          const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+          window.open(url, "_blank");
+        }
         popup.classList.remove("visible");
       });
 
@@ -122,6 +127,28 @@
     document.body.appendChild(btn);
   }
 
+  function toggleEmailTab(visible) {
+    const tabEmail = document.querySelector("#twf-tab-email");
+    const viewEmail = document.querySelector("#twf-view-email");
+    if (!tabEmail || !viewEmail) return;
+    tabEmail.style.display = visible ? "block" : "none";
+    if (!visible) {
+      tabEmail.classList.remove("active");
+      viewEmail.classList.remove("active");
+    }
+  }
+
+  function toggleWhatsappTab(visible) {
+    const tabWhatsApp = document.querySelector("#twf-tab-whatsapp");
+    const viewWhatsApp = document.querySelector("#twf-view-whatsapp");
+    if (!tabWhatsApp || !viewWhatsApp) return;
+    tabWhatsApp.style.display = visible ? "block" : "none";
+    if (!visible) {
+      tabWhatsApp.classList.remove("active");
+      viewWhatsApp.classList.remove("active");
+    }
+  }
+
   const btnListener = () => {
     const popup = document.getElementById(popupId);
     if (popup) {
@@ -135,9 +162,13 @@
         console.log(leadsList.length);
         if (leadsList.length) {
           // Get emails and mobiles
+          toggleWhatsappTab(false);
+          toggleEmailTab(true);
+          popup.querySelector("#twf-tab-email").classList.add("active");
           popup.querySelector("#twf-email-to").value = "";
           leadsList.forEach((lead) => {
-            const checked = lead.querySelector("input[type=checkbox]:checked");
+            const checked = lead.querySelector("span.customCheckBoxChecked");
+
             if (checked) {
               const email = lead.querySelector(".lv_data_email");
               if (email) {
@@ -145,30 +176,40 @@
                   email.textContent.trim() + ",";
               }
 
-              const mobiles = lead.querySelectorAll(".lv_data_phone");
-              mobiles.forEach((mobile) => {
-                if (mobile) {
-                  popup.querySelector("#twf-wa-to").value +=
-                    mobile.textContent.trim() + ",";
-                }
-              });
+              // const mobiles = lead.querySelectorAll(".lv_data_phone");
+              // mobiles.forEach((mobile) => {
+              //   if (mobile) {
+              //     popup.querySelector("#twf-wa-to").value +=
+              //       mobile.textContent.trim() + ",";
+              //   }
+              // });
             }
           });
         } else {
-          // Get single email
-          const email = document.querySelector(leadsSingleEmailSelector);
-          if (email) {
-            popup.querySelector("#twf-email-to").value =
-              email.textContent.trim();
-          }
+          toggleEmailTab(false);
+          toggleWhatsappTab(true);
+          popup.querySelector("#twf-wa-to").value = "";
+
+          // // Get single email
+          // const email = document.querySelector(leadsSingleEmailSelector);
+          // if (email) {
+          //   popup.querySelector("#twf-email-to").value =
+          //     email.textContent.trim();
+          // }
+
           // Get single mobile
           const mobile = document.querySelector(leadsSingleMobileSelector);
           if (mobile) {
-            popup.querySelector("#twf-wa-to").value = mobile.textContent.trim();
+            popup.querySelector("#twf-wa-to").value = mobile.textContent
+              .trim()
+              .replace(/[+\-]/g, "")
+              .replace(/\D/g, "");
           }
         }
         popup.classList.add("visible");
-        const defaultTab = document.getElementById("twf-tab-whatsapp");
+        const defaultTab = document.getElementById(
+          leadsList.length ? "twf-tab-email" : "twf-tab-whatsapp"
+        );
         if (defaultTab) defaultTab.click();
       }
     }

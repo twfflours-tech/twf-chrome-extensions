@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "BUttons for Zoho CRM",
+  "name": "Zoho CRM Helper",
   "description": "E-mail/Whatsapp a lead or selection of leads",
   "homepage_url": "https://twfflours.com",
   "version": "1.0",
@@ -11,7 +11,7 @@
       "48": "images/icon-48.png",
       "128": "images/icon-128.png"
     },
-    "default_title": "BUttons for Zoho CRM",
+    "default_title": "Zoho CRM Helper",
     "default_popup": "index.html"
   },
   "content_scripts": [
