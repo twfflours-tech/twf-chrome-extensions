@@ -4,8 +4,39 @@
   const popupId = "twf-zoho-helper-popup";
   const leadsListSelector =
     ".lyteExpTableOrigTableInnerWrap lyte-exptable-tr:not(#listviewHeaderRow)";
-  const leadsSingleEmailSelector = "#bc_mouseArea__EMAIL .dv_info_value";
   const leadsSingleMobileSelector = "#bc_mouseArea__MOBILE .dv_info_value";
+  const leadsSingleSalespersonSelector =
+    "#bc_mouseArea__SMOWNERID .dv_info_value";
+
+  const whatsappTemplates = [
+    {
+      "WhatsApp Template 1":
+        "Hello, this is <salesperson_name> from TWF. I have received your inquiry. Please let me know a suitable time to connect.",
+    },
+    {
+      "WhatsApp Template 2":
+        "Hi, <salesperson_name> here from TWF. I'm following up on your recent inquiry. When would be a good time to chat?",
+    },
+    {
+      "WhatsApp Template 3":
+        "Greetings! <salesperson_name> from TWF. I'm reaching out regarding your interest in our products. How can I assist you further?",
+    },
+  ];
+
+  const emailTemplates = [
+    {
+      "Email Template 1":
+        "Hello from TWF Flours. I have received your inquiry. Please let me know a suitable time to connect.",
+    },
+    {
+      "Email Template 2":
+        "Hi, TWF Flours here, reaching out. I'm following up on your recent inquiry. When would be a good time to chat?",
+    },
+    {
+      "Email Template 3":
+        "Greetings! TWF Flours here. I'm reaching out regarding your interest in our products. How can I assist you further?",
+    },
+  ];
 
   function createPopup() {
     if (!document.getElementById(styleId)) {
@@ -46,15 +77,37 @@
           <div id="twf-view-whatsapp" class="twf-view active">
             <label class="twf-label">To</label>
             <input id="twf-wa-to" class="twf-input" placeholder="Phone number" />
+            <label class="twf-label">Message Template</label>
+            <select id="twf-wa-template" class="twf-input">
+              ${whatsappTemplates
+                .map(
+                  (template, index) =>
+                    `<option value="${index}">${
+                      Object.keys(template)[0]
+                    }</option>`
+                )
+                .join("")}
+            </select>
             <label class="twf-label">Message</label>
-            <textarea id="twf-wa-msg" class="twf-textarea" rows="4" placeholder="Type your WhatsApp message">Hello, this is <salesperson_name> from TWF. I have received your inquiry. Please let me know a suitable time to connect.</textarea>
+            <textarea id="twf-wa-msg" class="twf-textarea" rows="4" placeholder="Type your WhatsApp message"></textarea>
             <button id="twf-wa-send" class="twf-send">Send</button>
           </div>
           <div id="twf-view-email" class="twf-view">
             <label class="twf-label">To</label>
             <input id="twf-email-to" class="twf-input" placeholder="Emails, comma-separated" />
+            <label class="twf-label">Message Template</label>
+            <select id="twf-email-template" class="twf-input">
+              ${emailTemplates
+                .map(
+                  (template, index) =>
+                    `<option value="${index}">${
+                      Object.keys(template)[0]
+                    }</option>`
+                )
+                .join("")}
+            </select>
             <label class="twf-label">Message</label>
-            <textarea id="twf-email-msg" class="twf-textarea" rows="4" placeholder="Type your email message">Hello, this is <salesperson_name> from TWF. I have received your inquiry. Please let me know a suitable time to connect.</textarea>
+            <textarea id="twf-email-msg" class="twf-textarea" rows="4" placeholder="Type your email message"></textarea>
             <button id="twf-email-send" class="twf-send">Send</button>
           </div>
         </div>
@@ -68,6 +121,40 @@
       const closeBtn = popup.querySelector("#twf-close");
       const waSend = popup.querySelector("#twf-wa-send");
       const emailSend = popup.querySelector("#twf-email-send");
+      const waTemplateSelect = popup.querySelector("#twf-wa-template");
+      const emailTemplateSelect = popup.querySelector("#twf-email-template");
+      const waMsgTextarea = popup.querySelector("#twf-wa-msg");
+      const emailMsgTextarea = popup.querySelector("#twf-email-msg");
+
+      waTemplateSelect.addEventListener("change", (event) => {
+        const selectedTemplate =
+          whatsappTemplates[event.target.value][
+            Object.keys(whatsappTemplates[event.target.value])[0]
+          ];
+        const salespersonName =
+          document
+            .querySelector(leadsSingleSalespersonSelector)
+            ?.textContent.trim() || "";
+        waMsgTextarea.value = selectedTemplate.replace(
+          "<salesperson_name>",
+          salespersonName
+        );
+      });
+
+      emailTemplateSelect.addEventListener("change", (event) => {
+        const selectedTemplate =
+          emailTemplates[event.target.value][
+            Object.keys(emailTemplates[event.target.value])[0]
+          ];
+        const salespersonName =
+          document
+            .querySelector(leadsSingleSalespersonSelector)
+            ?.textContent.trim() || "";
+        emailMsgTextarea.value = selectedTemplate.replace(
+          "<salesperson_name>",
+          salespersonName
+        );
+      });
 
       tabWhatsApp.addEventListener("click", () => {
         tabWhatsApp.classList.add("active");
@@ -206,6 +293,35 @@
               .replace(/\D/g, "");
           }
         }
+        let salespersonName =
+          document
+            .querySelector(leadsSingleSalespersonSelector)
+            ?.textContent.trim() || "";
+        const waMsgTextarea = popup.querySelector("#twf-wa-msg");
+        const emailMsgTextarea = popup.querySelector("#twf-email-msg");
+        const waTemplateSelect = popup.querySelector("#twf-wa-template");
+        const emailTemplateSelect = popup.querySelector("#twf-email-template");
+
+        // Initialize templates
+        if (waTemplateSelect && waMsgTextarea) {
+          const initialWATemplate =
+            whatsappTemplates[0][Object.keys(whatsappTemplates[0])[0]];
+          waMsgTextarea.value = initialWATemplate.replace(
+            "<salesperson_name>",
+            salespersonName
+          );
+          waTemplateSelect.value = "0";
+        }
+        if (emailTemplateSelect && emailMsgTextarea) {
+          const initialEmailTemplate =
+            emailTemplates[0][Object.keys(emailTemplates[0])[0]];
+          emailMsgTextarea.value = initialEmailTemplate.replace(
+            "<salesperson_name>",
+            salespersonName
+          );
+          emailTemplateSelect.value = "0";
+        }
+
         popup.classList.add("visible");
         const defaultTab = document.getElementById(
           leadsList.length ? "twf-tab-email" : "twf-tab-whatsapp"
