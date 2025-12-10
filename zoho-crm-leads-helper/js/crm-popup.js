@@ -8,6 +8,7 @@
   const leadsSingleSalespersonSelector =
     "#bc_mouseArea__SMOWNERID .dv_info_value";
 
+  const dataToSend = [];
   const whatsappTemplates = [
     {
       "WhatsApp Template 1":
@@ -38,7 +39,7 @@
     },
   ];
 
-  function createPopup() {
+  const createPopup = () => {
     if (!document.getElementById(styleId)) {
       const style = document.createElement("style");
       style.id = styleId;
@@ -54,6 +55,7 @@
         .twf-label { display: block; font-size: 12px; color: #555; margin: 8px 0 4px; }
         .twf-input, .twf-textarea { color: #555; width: 95%; border: 1px solid #d1d5db; border-radius: 6px; padding: 8px; font-size: 14px; }
         .twf-input:focus, .twf-textarea:focus { background: #fff!important; outline: none; border-color: #5468ff; box-shadow: 0 0 0 2px rgba(84,104,255,.1); }
+        select.twf-input { width: 100%; }
         .twf-send { margin-top: 10px; background: #5468ff; color: #fff; border: none; border-radius: 6px; padding: 8px 12px; cursor: pointer; }
         .twf-view { display: none; }
         .twf-view.active { display: block; }
@@ -66,7 +68,7 @@
       popup.id = popupId;
       popup.className = "twf-popup";
       popup.innerHTML = `
-        <div class="twf-header">
+        <div class="twf-header" style="display: none;">
           <div class="twf-tabs">
             <button id="twf-tab-whatsapp" class="twf-tab active">WhatsApp</button>
             <button id="twf-tab-email" class="twf-tab">E-mail</button>
@@ -76,7 +78,7 @@
         <div class="twf-content">
           <div id="twf-view-whatsapp" class="twf-view active">
             <label class="twf-label">To</label>
-            <input id="twf-wa-to" class="twf-input" placeholder="Phone number" />
+            <input id="twf-wa-to" class="twf-input" placeholder="Phone number" readonly/>
             <label class="twf-label">Message Template</label>
             <select id="twf-wa-template" class="twf-input">
               ${whatsappTemplates
@@ -131,14 +133,15 @@
           whatsappTemplates[event.target.value][
             Object.keys(whatsappTemplates[event.target.value])[0]
           ];
-        const salespersonName =
-          document
-            .querySelector(leadsSingleSalespersonSelector)
-            ?.textContent.trim() || "";
-        waMsgTextarea.value = selectedTemplate.replace(
-          "<salesperson_name>",
-          salespersonName
-        );
+        // const salespersonName =
+        //   document
+        //     .querySelector(leadsSingleSalespersonSelector)
+        //     ?.textContent.trim() || "";
+        waMsgTextarea.value = selectedTemplate;
+        // selectedTemplate.replace(
+        //   "<salesperson_name>",
+        //   salespersonName
+        // );
       });
 
       emailTemplateSelect.addEventListener("change", (event) => {
@@ -175,14 +178,34 @@
       });
 
       waSend.addEventListener("click", () => {
-        const raw = popup.querySelector("#twf-wa-to").value.trim();
-        const phone = raw.replace(/[+\-]/g, "").replace(/\D/g, "");
-        const msg = popup.querySelector("#twf-wa-msg").value.trim();
-        if (phone) {
-          const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
-          window.open(url, "_blank");
+        console.log(dataToSend);
+        if (
+          dataToSend.length &&
+          confirm(
+            `This will open ${dataToSend.length} WhatsApp link(s) in your browser. Proceed?`
+          )
+        ) {
+          dataToSend.forEach((item) => {
+            const text = waMsgTextarea.value.replace(
+              "<salesperson_name>",
+              item.owner
+            );
+            const url = `https://wa.me/${item.no}?text=${encodeURIComponent(
+              text
+            )}`;
+            window.open(url, "_blank");
+          });
         }
-        popup.classList.remove("visible");
+        // const raw = popup.querySelector("#twf-wa-to").value;
+        // console.log(raw);
+
+        // const phone = raw.replace(/[+\-]/g, "").replace(/\D/g, "");
+        // const msg = popup.querySelector("#twf-wa-msg").value.trim();
+        // if (phone) {
+        //   const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+        //   window.open(url, "_blank");
+        // }
+        // popup.classList.remove("visible");
       });
 
       emailSend.addEventListener("click", () => {
@@ -191,9 +214,9 @@
         popup.classList.remove("visible");
       });
     }
-  }
+  };
 
-  function createButton() {
+  const createButton = () => {
     if (document.getElementById(buttonId)) return;
     const btn = document.createElement("button");
     btn.id = buttonId;
@@ -212,9 +235,9 @@
     btn.style.cursor = "pointer";
     btn.addEventListener("click", btnListener);
     document.body.appendChild(btn);
-  }
+  };
 
-  function toggleEmailTab(visible) {
+  const toggleEmailTab = (visible) => {
     const tabEmail = document.querySelector("#twf-tab-email");
     const viewEmail = document.querySelector("#twf-view-email");
     if (!tabEmail || !viewEmail) return;
@@ -223,9 +246,9 @@
       tabEmail.classList.remove("active");
       viewEmail.classList.remove("active");
     }
-  }
+  };
 
-  function toggleWhatsappTab(visible) {
+  const toggleWhatsappTab = (visible) => {
     const tabWhatsApp = document.querySelector("#twf-tab-whatsapp");
     const viewWhatsApp = document.querySelector("#twf-view-whatsapp");
     if (!tabWhatsApp || !viewWhatsApp) return;
@@ -234,98 +257,138 @@
       tabWhatsApp.classList.remove("active");
       viewWhatsApp.classList.remove("active");
     }
-  }
+    const popup = document.getElementById(popupId);
+    const waMsgTextarea = popup.querySelector("#twf-wa-msg");
+    const waTemplateSelect = popup.querySelector("#twf-wa-template");
+    const initialWATemplate =
+      whatsappTemplates[0][Object.keys(whatsappTemplates[0])[0]];
+    // waMsgTextarea.value = initialWATemplate.replace(
+    //   "<salesperson_name>",
+    //   salespersonName
+    // );
+    waMsgTextarea.value = initialWATemplate;
+    waTemplateSelect.value = "0";
+  };
+
+  const handleLeadsList = (leadsList) => {
+    toggleEmailTab(false);
+    toggleWhatsappTab(true);
+    // popup.querySelector("#twf-tab-email").classList.add("active");
+    // popup.querySelector("#twf-email-to").value = "";
+    // let leadsList = document.querySelectorAll(leadsListSelector);
+    const popup = document.getElementById(popupId);
+    leadsList.forEach((lead) => {
+      const checked = lead.querySelector("span.customCheckBoxChecked");
+
+      if (checked) {
+        const mobile = lead.querySelector(".lv_data_phone");
+        let mobileFormatted;
+        // Check if div's aria-label contains the text 'Mobile text'
+        if (
+          mobile
+            .getAttribute("aria-label")
+            ?.toLowerCase()
+            .includes("Mobile".toLowerCase())
+        ) {
+          mobileFormatted = mobile.textContent
+            .trim()
+            .replace(/[+\-]/g, "")
+            .replace(/\D/g, "");
+          popup.querySelector("#twf-wa-to").value += mobileFormatted + ",";
+
+          const salespersonName =
+            lead.querySelector(".lv_data_username")?.textContent.trim() || "";
+          dataToSend.push({
+            no: mobileFormatted,
+            owner: salespersonName,
+          });
+        }
+        // const email = lead.querySelector(".lv_data_email");
+        // if (email) {
+        //   popup.querySelector("#twf-email-to").value +=
+        //     email.textContent.trim() + ",";
+        // }
+      }
+    });
+
+    // const emailMsgTextarea = popup.querySelector("#twf-email-msg");
+    // const emailTemplateSelect = popup.querySelector("#twf-email-template");
+
+    // if (emailTemplateSelect && emailMsgTextarea) {
+    //   const initialEmailTemplate =
+    //     emailTemplates[0][Object.keys(emailTemplates[0])[0]];
+    //   emailMsgTextarea.value = initialEmailTemplate.replace(
+    //     "<salesperson_name>",
+    //     salespersonName
+    //   );
+    //   emailTemplateSelect.value = "0";
+    // }
+  };
+
+  const handleSingleLead = () => {
+    toggleEmailTab(false);
+    toggleWhatsappTab(true);
+    const popup = document.getElementById(popupId);
+    const mobile = document.querySelector(leadsSingleMobileSelector);
+    if (mobile) {
+      const numberFormatted = mobile.textContent
+        .trim()
+        .replace(/[+\-]/g, "")
+        .replace(/\D/g, "");
+
+      popup.querySelector("#twf-wa-to").value = numberFormatted;
+      const salespersonName =
+        document
+          .querySelector(leadsSingleSalespersonSelector)
+          ?.textContent.trim() || "";
+
+      dataToSend.push({
+        no: numberFormatted,
+        owner: salespersonName,
+      });
+    }
+  };
 
   const btnListener = () => {
     const popup = document.getElementById(popupId);
+    popup.querySelector("#twf-wa-to").value = "";
+    dataToSend.length = 0;
+
     if (popup) {
       if (popup.classList.contains("visible")) {
         popup.classList.remove("visible");
       } else {
-        // Show popup
         // Check if the current page is the list page or details page.
-        let leadsList = document.querySelectorAll(leadsListSelector);
-
+        const leadsList = document.querySelectorAll(leadsListSelector);
         console.log(leadsList.length);
+
         if (leadsList.length) {
-          // Get emails and mobiles
-          toggleWhatsappTab(false);
-          toggleEmailTab(true);
-          popup.querySelector("#twf-tab-email").classList.add("active");
-          popup.querySelector("#twf-email-to").value = "";
+          let checkedLeads = 0;
           leadsList.forEach((lead) => {
-            const checked = lead.querySelector("span.customCheckBoxChecked");
-
-            if (checked) {
-              const email = lead.querySelector(".lv_data_email");
-              if (email) {
-                popup.querySelector("#twf-email-to").value +=
-                  email.textContent.trim() + ",";
-              }
-
-              // const mobiles = lead.querySelectorAll(".lv_data_phone");
-              // mobiles.forEach((mobile) => {
-              //   if (mobile) {
-              //     popup.querySelector("#twf-wa-to").value +=
-              //       mobile.textContent.trim() + ",";
-              //   }
-              // });
+            if (lead.querySelector("span.customCheckBoxChecked")) {
+              checkedLeads++;
             }
           });
-        } else {
-          toggleEmailTab(false);
-          toggleWhatsappTab(true);
-          popup.querySelector("#twf-wa-to").value = "";
 
-          // // Get single email
-          // const email = document.querySelector(leadsSingleEmailSelector);
-          // if (email) {
-          //   popup.querySelector("#twf-email-to").value =
-          //     email.textContent.trim();
-          // }
-
-          // Get single mobile
-          const mobile = document.querySelector(leadsSingleMobileSelector);
-          if (mobile) {
-            popup.querySelector("#twf-wa-to").value = mobile.textContent
-              .trim()
-              .replace(/[+\-]/g, "")
-              .replace(/\D/g, "");
+          if (checkedLeads > 15) {
+            alert("Maximum of 15 leads allowed for selection.");
+          } else if (checkedLeads === 0) {
+            alert("Please select at least one lead.");
+          } else {
+            // Show popup
+            popup.classList.add("visible");
+            handleLeadsList(leadsList);
           }
-        }
-        let salespersonName =
-          document
-            .querySelector(leadsSingleSalespersonSelector)
-            ?.textContent.trim() || "";
-        const waMsgTextarea = popup.querySelector("#twf-wa-msg");
-        const emailMsgTextarea = popup.querySelector("#twf-email-msg");
-        const waTemplateSelect = popup.querySelector("#twf-wa-template");
-        const emailTemplateSelect = popup.querySelector("#twf-email-template");
-
-        // Initialize templates
-        if (waTemplateSelect && waMsgTextarea) {
-          const initialWATemplate =
-            whatsappTemplates[0][Object.keys(whatsappTemplates[0])[0]];
-          waMsgTextarea.value = initialWATemplate.replace(
-            "<salesperson_name>",
-            salespersonName
-          );
-          waTemplateSelect.value = "0";
-        }
-        if (emailTemplateSelect && emailMsgTextarea) {
-          const initialEmailTemplate =
-            emailTemplates[0][Object.keys(emailTemplates[0])[0]];
-          emailMsgTextarea.value = initialEmailTemplate.replace(
-            "<salesperson_name>",
-            salespersonName
-          );
-          emailTemplateSelect.value = "0";
+        } else {
+          // Show popup
+          popup.classList.add("visible");
+          handleSingleLead();
         }
 
-        popup.classList.add("visible");
-        const defaultTab = document.getElementById(
-          leadsList.length ? "twf-tab-email" : "twf-tab-whatsapp"
-        );
+        // const defaultTab = document.getElementById(
+        //   leadsList.length ? "twf-tab-email" : "twf-tab-whatsapp"
+        // );
+        const defaultTab = document.getElementById("twf-tab-whatsapp");
         if (defaultTab) defaultTab.click();
       }
     }
