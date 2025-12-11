@@ -270,12 +270,12 @@
     waTemplateSelect.value = "0";
   };
 
-  const handleLeadsList = (leadsList) => {
+  const handleLeadsList = () => {
     toggleEmailTab(false);
     toggleWhatsappTab(true);
     // popup.querySelector("#twf-tab-email").classList.add("active");
     // popup.querySelector("#twf-email-to").value = "";
-    // let leadsList = document.querySelectorAll(leadsListSelector);
+    const leadsList = document.querySelectorAll(leadsListSelector);
     const popup = document.getElementById(popupId);
     leadsList.forEach((lead) => {
       const checked = lead.querySelector("span.customCheckBoxChecked");
@@ -377,7 +377,7 @@
           } else {
             // Show popup
             popup.classList.add("visible");
-            handleLeadsList(leadsList);
+            handleLeadsList();
           }
         } else {
           // Show popup
