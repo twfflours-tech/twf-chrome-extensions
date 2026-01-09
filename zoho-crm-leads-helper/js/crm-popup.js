@@ -9,20 +9,44 @@
     "#bc_mouseArea__SMOWNERID .dv_info_value";
 
   const dataToSend = [];
-  const whatsappTemplates = [
-    {
-      "WhatsApp Template 1":
-        "Hello, this is <salesperson_name> from TWF. I have received your inquiry. Please let me know a suitable time to connect.",
-    },
-    {
-      "WhatsApp Template 2":
-        "Hi, <salesperson_name> here from TWF. I'm following up on your recent inquiry. When would be a good time to chat?",
-    },
-    {
-      "WhatsApp Template 3":
-        "Greetings! <salesperson_name> from TWF. I'm reaching out regarding your interest in our products. How can I assist you further?",
-    },
-  ];
+  let whatsappTemplates = [];
+
+  const fetchWhatsappTemplates = async () => {
+    const popup = document.getElementById(popupId);
+    const templateSelect = popup.querySelector("#twf-wa-template");
+    const originalContent = templateSelect.innerHTML;
+
+    // Show loader
+    templateSelect.innerHTML =
+      '<option value="">Fetching templates...</option>';
+    templateSelect.disabled = true;
+
+    try {
+      const response = await fetch(
+        "https://twf-store.bubbleapps.io/version-72rv0/api/1.1/wf/whatsapp_templates/"
+      );
+      const data = await response.json();
+
+      // Update templates array
+      whatsappTemplates = data.response.data?.map((template, index) => ({
+        [`WhatsApp Template ${index + 1}`]: template.text,
+      }));
+
+      // Update template dropdown
+      templateSelect.innerHTML = whatsappTemplates
+        .map(
+          (template, index) =>
+            `<option value="${index}">${Object.keys(template)[0]}</option>`
+        )
+        .join("");
+    } catch (error) {
+      console.error("Error fetching WhatsApp templates:", error);
+      // Restore original content if fetch fails
+      templateSelect.innerHTML = originalContent;
+    } finally {
+      templateSelect.disabled = false;
+    }
+  };
 
   const emailTemplates = [
     {
@@ -81,14 +105,7 @@
             <input id="twf-wa-to" class="twf-input" placeholder="Phone number" readonly/>
             <label class="twf-label">Message Template</label>
             <select id="twf-wa-template" class="twf-input">
-              ${whatsappTemplates
-                .map(
-                  (template, index) =>
-                    `<option value="${index}">${
-                      Object.keys(template)[0]
-                    }</option>`
-                )
-                .join("")}
+              <option value="">Loading templates...</option>
             </select>
             <label class="twf-label">Message</label>
             <textarea id="twf-wa-msg" class="twf-textarea" rows="4" placeholder="Type your WhatsApp message"></textarea>
@@ -122,17 +139,22 @@
       const viewEmail = popup.querySelector("#twf-view-email");
       const closeBtn = popup.querySelector("#twf-close");
       const waSend = popup.querySelector("#twf-wa-send");
-      const emailSend = popup.querySelector("#twf-email-send");
       const waTemplateSelect = popup.querySelector("#twf-wa-template");
       const emailTemplateSelect = popup.querySelector("#twf-email-template");
       const waMsgTextarea = popup.querySelector("#twf-wa-msg");
       const emailMsgTextarea = popup.querySelector("#twf-email-msg");
 
       waTemplateSelect.addEventListener("change", (event) => {
-        const selectedTemplate =
-          whatsappTemplates[event.target.value][
-            Object.keys(whatsappTemplates[event.target.value])[0]
-          ];
+        const templateIndex = event.target.value;
+        let selectedTemplate = "";
+
+        if (whatsappTemplates.length > 0 && whatsappTemplates[templateIndex]) {
+          selectedTemplate =
+            whatsappTemplates[templateIndex][
+              Object.keys(whatsappTemplates[templateIndex])[0]
+            ];
+        }
+
         // const salespersonName =
         //   document
         //     .querySelector(leadsSingleSalespersonSelector)
@@ -195,6 +217,7 @@
             )}`;
             window.open(url, "_blank");
           });
+          popup.classList.remove("visible");
         }
         // const raw = popup.querySelector("#twf-wa-to").value;
         // console.log(raw);
@@ -205,14 +228,13 @@
         //   const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
         //   window.open(url, "_blank");
         // }
-        // popup.classList.remove("visible");
       });
 
-      emailSend.addEventListener("click", () => {
-        const to = popup.querySelector("#twf-email-to").value.trim();
-        const msg = popup.querySelector("#twf-email-msg").value.trim();
-        popup.classList.remove("visible");
-      });
+      // emailSend.addEventListener("click", () => {
+      //   const to = popup.querySelector("#twf-email-to").value.trim();
+      //   const msg = popup.querySelector("#twf-email-msg").value.trim();
+      //   popup.classList.remove("visible");
+      // });
     }
   };
 
@@ -235,6 +257,9 @@
     btn.style.cursor = "pointer";
     btn.addEventListener("click", btnListener);
     document.body.appendChild(btn);
+
+    // Fetch WhatsApp templates when popup is created
+    fetchWhatsappTemplates();
   };
 
   const toggleEmailTab = (visible) => {
@@ -260,8 +285,14 @@
     const popup = document.getElementById(popupId);
     const waMsgTextarea = popup.querySelector("#twf-wa-msg");
     const waTemplateSelect = popup.querySelector("#twf-wa-template");
-    const initialWATemplate =
-      whatsappTemplates[0][Object.keys(whatsappTemplates[0])[0]];
+
+    // Handle empty templates case
+    let initialWATemplate = "";
+    if (whatsappTemplates.length > 0) {
+      initialWATemplate =
+        whatsappTemplates[0][Object.keys(whatsappTemplates[0])[0]];
+    }
+
     // waMsgTextarea.value = initialWATemplate.replace(
     //   "<salesperson_name>",
     //   salespersonName
