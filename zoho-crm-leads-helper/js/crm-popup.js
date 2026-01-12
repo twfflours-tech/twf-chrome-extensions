@@ -470,6 +470,11 @@
             .trim()
             .replace(/[+\-]/g, "")
             .replace(/\D/g, "");
+
+          // Replace leading 0 with 91
+          if (mobileFormatted.startsWith("0")) {
+            mobileFormatted = "91" + mobileFormatted.substring(1);
+          }
           popup.querySelector("#twf-wa-to").value += mobileFormatted + ",";
 
           const salespersonName =
@@ -530,10 +535,15 @@
     const popup = document.getElementById(popupId);
     const mobile = document.querySelector(leadsSingleMobileSelector);
     if (mobile) {
-      const numberFormatted = mobile.textContent
+      let numberFormatted = mobile.textContent
         .trim()
         .replace(/[+\-]/g, "")
         .replace(/\D/g, "");
+
+      // Replace leading 0 with 91
+      if (numberFormatted.startsWith("0")) {
+        numberFormatted = "91" + numberFormatted.substring(1);
+      }
 
       popup.querySelector("#twf-wa-to").value = numberFormatted;
       const salespersonName =
