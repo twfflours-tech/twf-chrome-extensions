@@ -10,6 +10,11 @@
 
   const dataToSend = [];
   let whatsappTemplates = [];
+  const productInput = document.createElement("input");
+  const productLabel = document.createElement("label");
+
+  const dateInput = document.createElement("input");
+  const dateLabel = document.createElement("label");
 
   const fetchWhatsappTemplates = async () => {
     const popup = document.getElementById(popupId);
@@ -28,8 +33,8 @@
       const data = await response.json();
 
       // Update templates array
-      whatsappTemplates = data.response.data?.map((template, index) => ({
-        [`WhatsApp Template ${index + 1}`]: template.text,
+      whatsappTemplates = data.response.data.map((template, idx) => ({
+        [template.title]: template.text,
       }));
 
       // Update template dropdown
@@ -155,6 +160,135 @@
             ];
         }
 
+        // Handle product name input based on template content
+        const viewWhatsApp = popup.querySelector("#twf-view-whatsapp");
+        const templateSelect = popup.querySelector("#twf-wa-template");
+
+        // Remove existing product name input if it exists
+        const existingProductInput =
+          viewWhatsApp.querySelector("#product-name");
+        if (existingProductInput) {
+          existingProductInput.remove();
+          const existingProductLabel = viewWhatsApp.querySelector(
+            "[for='product-name']"
+          );
+          if (existingProductLabel) existingProductLabel.remove();
+        }
+
+        // Remove existing date input if it exists
+        const existingDateInput = viewWhatsApp.querySelector("#date-input");
+        if (existingDateInput) {
+          existingDateInput.remove();
+          const existingDateLabel =
+            viewWhatsApp.querySelector("[for='date-input']");
+          if (existingDateLabel) existingDateLabel.remove();
+        }
+
+        // Check if template contains {{product_name}}
+        if (selectedTemplate.includes("{{product_name}}")) {
+          // Create product name input and label
+          // const productLabel = document.createElement("label");
+          productLabel.className = "twf-label";
+          productLabel.htmlFor = "product-name";
+          productLabel.textContent = "Product Name";
+
+          // const productInput = document.createElement("input");
+          productInput.type = "text";
+          productInput.id = "product-name";
+          productInput.className = "twf-input";
+          productInput.placeholder = "Enter product name";
+
+          // Insert after template select
+          templateSelect.parentNode.insertBefore(
+            productLabel,
+            templateSelect.nextSibling
+          );
+          templateSelect.parentNode.insertBefore(
+            productInput,
+            productLabel.nextSibling
+          );
+
+          // // Update message when product name changes
+          // productInput.addEventListener("input", () => {
+          //   let updatedMessage = selectedTemplate;
+          //   if (productInput.value.trim()) {
+          //     updatedMessage = updatedMessage.replace(
+          //       /\{\{product_name\}\}/g,
+          //       productInput.value.trim()
+          //     );
+          //   }
+          //   // Update date if it exists
+          //   const dateInput = viewWhatsApp.querySelector("#date-input");
+          //   if (dateInput && dateInput.value) {
+          //     updatedMessage = updatedMessage.replace(
+          //       /\{\{date\}\}/g,
+          //       dateInput.value
+          //     );
+          //   }
+          //   waMsgTextarea.value = updatedMessage;
+          // });
+        }
+
+        // Check if template contains {{date}}
+        if (selectedTemplate.includes("{{date}}")) {
+          // Create date input and label
+          // const dateLabel = document.createElement("label");
+          dateLabel.className = "twf-label";
+          dateLabel.htmlFor = "date-input";
+          dateLabel.textContent = "Date";
+
+          // const dateInput = document.createElement("input");
+          dateInput.type = "date";
+          dateInput.id = "date-input";
+          dateInput.className = "twf-input";
+
+          // Set default date to today
+          const today = new Date().toISOString().split("T")[0];
+          dateInput.value = today;
+
+          // Insert after product input or template select if no product input
+          const productInput = viewWhatsApp.querySelector("#product-name");
+          if (productInput) {
+            productInput.parentNode.insertBefore(
+              dateLabel,
+              productInput.nextSibling
+            );
+            productInput.parentNode.insertBefore(
+              dateInput,
+              dateLabel.nextSibling
+            );
+          } else {
+            templateSelect.parentNode.insertBefore(
+              dateLabel,
+              templateSelect.nextSibling
+            );
+            templateSelect.parentNode.insertBefore(
+              dateInput,
+              dateLabel.nextSibling
+            );
+          }
+
+          // // Update message when date changes
+          // dateInput.addEventListener("change", () => {
+          //   let updatedMessage = selectedTemplate;
+          //   if (dateInput.value) {
+          //     updatedMessage = updatedMessage.replace(
+          //       /\{\{date\}\}/g,
+          //       dateInput.value
+          //     );
+          //   }
+          //   // Update product name if it exists
+          //   const productInput = viewWhatsApp.querySelector("#product-name");
+          //   if (productInput && productInput.value.trim()) {
+          //     updatedMessage = updatedMessage.replace(
+          //       /\{\{product_name\}\}/g,
+          //       productInput.value.trim()
+          //     );
+          //   }
+          //   waMsgTextarea.value = updatedMessage;
+          // });
+        }
+
         // const salespersonName =
         //   document
         //     .querySelector(leadsSingleSalespersonSelector)
@@ -176,7 +310,7 @@
             .querySelector(leadsSingleSalespersonSelector)
             ?.textContent.trim() || "";
         emailMsgTextarea.value = selectedTemplate.replace(
-          "<salesperson_name>",
+          "{{salesperson_name}}",
           salespersonName
         );
       });
@@ -208,10 +342,22 @@
           )
         ) {
           dataToSend.forEach((item) => {
-            const text = waMsgTextarea.value.replace(
-              "<salesperson_name>",
+            let text = waMsgTextarea.value.replace(
+              "{{salesperson_name}}",
               item.owner
             );
+            // let updatedMessage = selectedTemplate;
+            text = text.replace("{{customer_name}}", item.customer);
+            const product = productInput.value.trim() || "";
+            if (product.length) {
+              text = text.replace("{{product_name}}", product);
+            }
+
+            const date = dateInput.value.trim() || "";
+            if (date.length) {
+              text = text.replace("{{date}}", date);
+            }
+            // waMsgTextarea.value = updatedMessage;
             const url = `https://wa.me/${item.no}?text=${encodeURIComponent(
               text
             )}`;
@@ -257,7 +403,6 @@
     btn.style.cursor = "pointer";
     btn.addEventListener("click", btnListener);
     document.body.appendChild(btn);
-
     // Fetch WhatsApp templates when popup is created
     fetchWhatsappTemplates();
   };
@@ -319,7 +464,7 @@
           mobile
             .getAttribute("aria-label")
             ?.toLowerCase()
-            .includes("Mobile".toLowerCase())
+            .includes("mobile".toLowerCase())
         ) {
           mobileFormatted = mobile.textContent
             .trim()
@@ -329,9 +474,32 @@
 
           const salespersonName =
             lead.querySelector(".lv_data_username")?.textContent.trim() || "";
+
+          let customerName = "";
+          const customer = lead.querySelectorAll(".lv_data_textfield");
+          customer.forEach((cust) => {
+            if (
+              cust
+                .getAttribute("aria-label")
+                ?.toLowerCase()
+                .includes("lead name".toLowerCase())
+            ) {
+              customerName = cust.textContent.trim();
+            }
+          });
+          // if (
+          //   customer
+          //     .getAttribute("aria-label")
+          //     ?.toLowerCase()
+          //     .includes("Lead Name".toLowerCase())
+          // ) {
+          //   customerName = customer.textContent.trim();
+          // }
+
           dataToSend.push({
             no: mobileFormatted,
             owner: salespersonName,
+            customer: customerName,
           });
         }
         // const email = lead.querySelector(".lv_data_email");
@@ -376,13 +544,20 @@
       dataToSend.push({
         no: numberFormatted,
         owner: salespersonName,
+        customer:
+          document.querySelector("#title_LASTNAME").textContent.trim() || "",
       });
     }
   };
 
   const btnListener = () => {
+    productInput.value = "";
     const popup = document.getElementById(popupId);
     popup.querySelector("#twf-wa-to").value = "";
+    productInput?.remove();
+    productLabel?.remove();
+    dateInput?.remove();
+    dateLabel?.remove();
     dataToSend.length = 0;
 
     if (popup) {
